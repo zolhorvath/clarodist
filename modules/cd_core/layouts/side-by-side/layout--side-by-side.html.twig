@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display the side-by-side layout.
+ *
+ * Available variables:
+ * - content: Regions (with content) in this layout, keyed by region name.
+ * - attributes: HTML attributes for the layout wrapper element.
+ * - region_attributes: HTML attributes for the regions, keyed by region name.
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('sbs-layout') }}>
+  <div{{ region_attributes.content_top.addClass('sbs-layout__region', 'sbs-layout__region--top') }}>
+    {{ content.content_top }}
+  </div>
+  <div{{ region_attributes.main.addClass('sbs-layout__region', 'sbs-layout__region--main') }}>
+    {{ content.main }}
+  </div>
+  <div{{ region_attributes.content_bottom.addClass('sbs-layout__region', 'sbs-layout__region--bottom') }}>
+    {{ content.content_bottom }}
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Contains code for Clarodist Core module.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\Component\Utility\Html;
+
+/**
+ * Prepares variables for the side_by_side layout template.
+ *
+ * Default template: layout--side-by-side.html.twig.
+ *
+ * See the layout--side-by-side.html.twig template for the list of variables.
+ */
+function template_preprocess_layout__side_by_side(&$variables) {
+  $variables['content']['main']['#pre_render'][] = '_cd_core_prerender_sbs';
+}
+
+/**
+ * Prerender callback for side by side layout.
+ *
+ * Wraps each children of the region in a container.
+ */
+function _cd_core_prerender_sbs($region) {
+  foreach (Element::children($region) as $item_key) {
+    $region[$item_key]['#theme_wrappers']['container__sbs_item'] = [
+      '#attributes' => ['data-region' => $region[$item_key]['#group']],
+    ];
+  }
+
+  return $region;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for container__sbs_items.
+ *
+ * Removes possibly duped attributes (classes or mainly ids) from the container
+ * by overriding the provided array.
+ */
+function cd_core_preprocess_container__sbs_item(&$variables) {
+  $region = !empty($variables['attributes']['data-region']) ?
+    $variables['attributes']['data-region'] : FALSE;
+  $variables['attributes'] = ['class' => ['sbs-layout__item']];
+
+  if ($region) {
+    $variables['attributes']['class'][] = Html::getClass('sbs-layout__item--' . $region);
+  }
+}

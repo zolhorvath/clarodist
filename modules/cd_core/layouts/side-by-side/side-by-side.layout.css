@@ -1,0 +1,24 @@
+/**
+ * @file
+ * Layout for Side by side.
+ */
+
+@media (min-width: 601px) {
+  .sbs-layout__region--main {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -20px;
+  }
+
+  .sbs-layout__item--main {
+    /**
+     * This should be `flex: 0 0 50%`, without other explicitly set width.
+     * We're working around an IE bug.
+     * @see https://github.com/philipwalton/flexbugs#flexbug-7
+     */
+    flex: 0 0 auto;
+    padding-left: 20px;
+    box-sizing: border-box;
+    width: 50%;
+  }
+}

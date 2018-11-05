@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Contains code for Navigation Test.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_toolbar().
+ */
+function navigation_toolbar() {
+  $items['navigation_config'] = [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'link',
+      '#title' => t('Nav Config'),
+      '#url' => Url::fromRoute('navigation.configtest'),
+    ],
+    '#weight' => 105,
+  ];
+  $items['navigation_admin_tasks'] = [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'link',
+      '#title' => t('Nav Tasks'),
+      '#url' => Url::fromRoute('system.admin'),
+    ],
+    '#weight' => 106,
+  ];
+
+  return $items;
+}

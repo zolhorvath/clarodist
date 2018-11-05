@@ -1,0 +1,7 @@
+name: 'Navigation'
+type: module
+description: 'Test pages for navigation component'
+core: 8.x
+package: Claro
+dependencies: {  }
+# /admin/config

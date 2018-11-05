@@ -1,0 +1,14 @@
+name: 'Text test form'
+type: module
+description: 'Test form for text-like form items'
+core: 8.x
+package: Claro
+dependencies:
+  - drupal:contact
+  - drupal:datetime
+  - drupal:datetime_range
+  - drupal:image
+  - drupal:telephone
+  - drupal:text
+  - clarodist:cd_core
+  - clarodist:textfixtures

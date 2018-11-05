@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Defines a simple textfixture field type.
+ */
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function textfixtures_field_formatter_info_alter(&$info) {
+  $info['string']['field_types'][] = 'textfixture';
+}

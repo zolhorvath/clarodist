@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for Claro Distribution project.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function clarodist_install() {
+  $config_factory = \Drupal::service('config.factory');
+
+  // Set front page to "node".
+  $config_factory->getEditable('system.site')
+    ->set('page.front', '/admin/appearance/styleguide')
+    ->save();
+
+  // Allow visitor account creation only by administrators.
+  $config_factory->getEditable('user.settings')
+    ->set('register', USER_REGISTER_ADMINISTRATORS_ONLY)
+    ->save();
+
+  // Assign user 1 the "administrator" role.
+  $user = User::load(1);
+  $user->roles[] = 'administrator';
+  $user->save();
+
+  // We install some menu links, so we have to rebuild the router, to ensure the
+  // menu links are valid.
+  \Drupal::service('router.builder')->rebuildIfNeeded();
+
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, [
+    'view style guides',
+    'use text format basic_html',
+    'access site-wide contact form',
+  ]);
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, [
+    'view style guides',
+    'use text format basic_html',
+    'access site-wide contact form',
+  ]);
+
+  $theme = 'seven';
+  $themes_available = \Drupal::service('theme_handler')->rebuildThemeData();
+
+  if (
+    !empty($themes_available['claro']) &&
+    \Drupal::service('theme_installer')->install(['claro'])
+  ) {
+    $theme = 'claro';
+  }
+
+  $config_factory->getEditable('system.theme')
+    ->set('admin', $theme)
+    ->set('default', $theme)
+    ->save();
+}

@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "ssm": "node ./scripts/screenshotMerge.js",
+    "ssf": "node ./scripts/screenshotFix.js",
+    "ssmfm": "node ./scripts/screenshotMerge.js && node ./scripts/screenshotFix.js && node ./scripts/screenshotMerge.js --fixed-only"
+  },
+  "devDependencies": {
+    "archiver": "^3.0.0",
+    "merge-img": "^2.1.2",
+    "nightwatch": "^0.9.21"
+  }
+}

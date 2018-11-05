@@ -1,0 +1,53 @@
+name: 'Claro Distribution'
+type: profile
+description: 'Drupal distribution for Claro Distribution'
+core: 8.x
+distribution:
+  name: 'Claro Distribution'
+  langcode: en
+dependencies:
+  - automated_cron
+  - big_pipe
+  - block
+  - block_content
+  - breakpoint
+  - checkboxradio
+  - ckeditor
+  - color
+  - comment
+  - config
+  - contact
+  - contextual
+  - datetime
+  - datetime_range
+  - dblog
+  - dynamic_page_cache
+  - editor
+  - field_ui
+  - file
+  - help
+  - history
+  - image
+  - inline_form_errors
+  - lang_hebrew
+  - menu_link_content
+  - menu_ui
+  - node
+  - options
+  - path
+  - quickedit
+  - rdf
+  - search
+  - shortcut
+  - cd_core
+  - styleguide
+  - taxonomy
+  - telephone
+  - textarea
+  - textform
+  - toolbar
+  - tour
+  - views
+  - views_ui
+themes:
+  - seven

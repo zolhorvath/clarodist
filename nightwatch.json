@@ -1,0 +1,179 @@
+{
+  "src_folders" : ["tests/Nightwatch/Tests"],
+  "output_folder" : "reports",
+  "custom_commands_path" : ["tests/Nightwatch/Commands"],
+  "custom_assertions_path" : "",
+  "page_objects_path" : "",
+  "globals_path" : "",
+
+  "test_settings" : {
+    "default" : {
+      "launch_url" : "http://eight.localhost",
+      "selenium_port"  : 4444,
+      "selenium_host"  : "localhost",
+      "silent": true,
+      "screenshots" : {
+        "enabled" : true,
+        "path" : "reports/screenshots"
+      },
+      "globals": {
+        "waitForConditionTimeout": 5000,
+        "fullScreenShotOverride": true,
+        "fullScreenShotPieces": false
+      },
+      "desiredCapabilities": {
+        "browserName": "chrome"
+      }
+    },
+
+    "chrome": {
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "platform": "MAC",
+        "chromeOptions": {
+          "args": [
+            "headless",
+            "disable-gpu",
+            "disable-web-security",
+            "ignore-certificate-errors"
+          ]
+        },
+        "goog:chromeOptions": {
+          "args": [
+            "headless",
+            "disable-gpu",
+            "disable-web-security",
+            "ignore-certificate-errors"
+          ]
+        }
+      }
+    },
+
+    "chromeWin": {
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "platform": "WIN8_1",
+        "chromeOptions": {
+          "args": [
+            "headless",
+            "disable-gpu",
+            "disable-web-security",
+            "ignore-certificate-errors"
+          ]
+        },
+        "goog:chromeOptions": {
+          "args": [
+            "headless",
+            "disable-gpu",
+            "disable-web-security",
+            "ignore-certificate-errors"
+          ]
+        }
+      }
+    },
+
+    "chromeLinux": {
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "platform": "Linux",
+        "chromeOptions": {
+          "args": [
+            "headless",
+            "disable-gpu",
+            "disable-web-security",
+            "ignore-certificate-errors"
+          ]
+        },
+        "goog:chromeOptions": {
+          "args": [
+            "headless",
+            "disable-gpu",
+            "disable-web-security",
+            "ignore-certificate-errors"
+          ]
+        }
+      }
+    },
+
+    "firefox": {
+      "desiredCapabilities": {
+        "browserName": "firefox",
+        "platformName": "mac",
+        "moz:firefoxOptions": {
+          "args": ["-headless"]
+        }
+      }
+    },
+
+    "firefoxWin": {
+      "desiredCapabilities": {
+        "browserName": "firefox",
+        "platformName": "windows",
+        "moz:firefoxOptions": {
+          "args": ["-headless"]
+        }
+      }
+    },
+
+    "firefoxLinux": {
+      "desiredCapabilities": {
+        "browserName": "firefox",
+        "platformName": "linux",
+        "moz:firefoxOptions": {
+          "args": ["-headless"]
+        }
+      }
+    },
+
+    "safari": {
+      "desiredCapabilities": {
+        "browserName": "safari"
+      }
+    },
+
+    "ie11": {
+      "desiredCapabilities": {
+        "browserName": "internet explorer",
+        "se:ieOptions": {
+          "ignoreZoomSetting": true,
+          "nativeEvents": false,
+          "requireWindowFocus": true
+        }
+      }
+    },
+
+    "edge": {
+      "desiredCapabilities": {
+        "browserName": "MicrosoftEdge"
+      }
+    },
+
+    "iPhone5": {
+      "desiredCapabilities": {
+        "browserName": "Safari",
+        "platform": "IOS",
+        "platformName": "iOS",
+        "platformVersion": "11.2",
+        "deviceName": "iPhone 5s",
+        "automationName": "XCUITest",
+        "newCommandTimeout": 120
+      }
+    },
+
+    "android": {
+      "desiredCapabilities": {
+        "browserName": "Chrome",
+        "platformName": "Android",
+        "automationName": "UiAutomator2",
+        "deviceName": "nexus",
+        "avd": "nexus",
+        "chromeOptions": {
+          "args": ["--no-first-run"]
+        },
+        "goog:chromeOptions": {
+          "args": ["--no-first-run"]
+        }
+      }
+    }
+  }
+}

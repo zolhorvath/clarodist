@@ -1,0 +1,7 @@
+name: Textfixtures
+type: module
+description: 'Defines a field type for telephone numbers.'
+package: Field types
+core: 8.x
+dependencies:
+  - drupal:field

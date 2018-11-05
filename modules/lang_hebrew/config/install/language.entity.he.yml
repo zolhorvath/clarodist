@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: he
+label: Hebrew
+direction: rtl
+weight: 1
+locked: false

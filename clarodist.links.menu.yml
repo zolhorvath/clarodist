@@ -1,0 +1,5 @@
+clarodist.front_page:
+  title: 'Home'
+  route_name: '<front>'
+  weight: 0
+  menu_name: main

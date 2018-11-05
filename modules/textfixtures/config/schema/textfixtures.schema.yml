@@ -1,0 +1,12 @@
+# Schema for the configuration files of the Text Fixtures module.
+
+field.widget.settings.textfixture:
+  type: mapping
+  label: 'Textfixtures default format settings'
+  mapping:
+    input_type:
+      type: string
+      label: 'Type of the input element'
+    placeholder:
+      type: label
+      label: 'Placeholder'

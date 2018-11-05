@@ -1,0 +1,18 @@
+side_by_side:
+  label: 'Side by side'
+  path: 'layouts/side-by-side'
+  category: 'Clarodist'
+  template: layout--side-by-side
+  library: cd_core/side-by-side
+  default_region: main
+  icon_map:
+    - [content_top]
+    - [main]
+    - [content_bottom]
+  regions:
+    content_top:
+      label: Top
+    main:
+      label: 'Main content'
+    content_bottom:
+      label: Bottom

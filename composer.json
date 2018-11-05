@@ -1,0 +1,18 @@
+{
+    "name": "zolhorvath/clarodist",
+    "description": "Drupal 8 distribution for Claro development",
+    "type": "drupal-profile",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Zoltan Horvath",
+            "email": "z.a.horvath@gmail.com",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "drupal/styleguide": "^1.0.0-alpha3"
+    },
+    "require-dev": {
+    }
+}
