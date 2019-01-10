@@ -26,8 +26,9 @@ module.exports = {
         .resizeWindow(1024, 600)
         .smartURL((langprefix ? '/' + langprefix : '') + '/table')
         .waitTillElementPresent('table.test-table')
-        .click('[name="table[1]"]')
-        .moveToElement('table.test-table tbody tr:nth-child(3) td:first-child', 10, 10)
+        .click('[name="table[3]"]')
+        .moveToElement('table.test-table tbody tr:nth-child(1) td:first-child', 10, 10)
+        .click('table.test-table tbody tr:nth-child(1)')
         .savefullScreenShot('01', langprefix);
     });
   },
