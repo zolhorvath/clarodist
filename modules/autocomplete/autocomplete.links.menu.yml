@@ -1,5 +1,5 @@
 autocomplete.test:
-  title: 'Checkboxes and Radios'
+  title: 'Autocomplete'
   route_name: autocomplete.test
   menu_name: main
   weight: 9
