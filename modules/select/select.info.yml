@@ -1,0 +1,9 @@
+name: 'Select Test Form'
+type: module
+description: 'Test form for single and multiple select'
+core: 8.x
+package: Claro
+dependencies:
+  - drupal:contact
+  - drupal:options
+  - clarodist:cd_core
