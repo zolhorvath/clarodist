@@ -25,7 +25,7 @@ module.exports = {
     ['', 'he'].forEach((langprefix) => {
       browser
         .resizeWindow(1024, 600)
-        .smartURLs((langprefix ? '/' + langprefix : '') + '/contact/textarea')
+        .smartURL((langprefix ? '/' + langprefix : '') + '/contact/textarea')
         .setValueAndChange('[name="message[0][value]"]', 'Test message body with error')
         .waitTillElementPresent('[name="formatted[0][value]"] + .cke .cke_wysiwyg_frame', 5000)
         .click('[name="formatted[0][format]"]')
