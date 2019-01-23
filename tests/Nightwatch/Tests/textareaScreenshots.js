@@ -22,8 +22,6 @@ module.exports = {
     }
   },
   'Textarea form'(browser) {
-    const path = require('path');
-
     ['', 'he'].forEach((langprefix) => {
       browser
         .resizeWindow(1024, 600)

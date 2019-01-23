@@ -61,7 +61,7 @@ module.exports = {
         .waitTillElementPresent('.compact-link > a[href*="admin/compact?"]')
         .savefullScreenShot('06-index-compact', langprefix)
         // Switching off compact mode for further tests.
-        .click('.compact-link a[href*="admin/compact?"]')
+        .click('.compact-link a[href*="admin/compact?"]');
     });
   }
 };

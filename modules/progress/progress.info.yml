@@ -1,0 +1,6 @@
+name: 'Progress Test Page'
+type: module
+description: 'Test page for progress indicatorss'
+core: 8.x
+package: Claro
+dependencies: {  }

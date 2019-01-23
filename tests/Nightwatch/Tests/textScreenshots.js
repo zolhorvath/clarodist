@@ -31,7 +31,7 @@ module.exports = {
 
     ['', 'he'].forEach((langprefix) => {
       browser
-        .perform(() => {
+        .perform(() => {
           // Skip file upload tests on mobileEmulation since it's not supported.
           const platformName = (browser.capabilities.platformName || browser.capabilities.platform || 'nan').toLowerCase();
           const browserName = (browser.capabilities.browserName || 'nan').toLowerCase();
@@ -73,13 +73,13 @@ module.exports = {
           if (fileTest) {
             // Valid image file.
             browser
-            .setValueAndChange('[name="files[image_0]"]:not([disabled])', imagePath)
-            .waitTillElementPresent('[name="image[0][alt]"]', 5000)
-            .setValueAndChange('[name="image[0][alt]"]', 'Green square')
-            // Valid file.
-            .setValueAndChange('[name="files[file_0]"]:not([disabled])', filePath)
-            .waitTillElementPresent('[name="file[0][description]"]', 5000)
-            .setValueAndChange('[name="file[0][description]"]', 'File description')
+              .setValueAndChange('[name="files[image_0]"]:not([disabled])', imagePath)
+              .waitTillElementPresent('[name="image[0][alt]"]', 5000)
+              .setValueAndChange('[name="image[0][alt]"]', 'Green square')
+              // Valid file.
+              .setValueAndChange('[name="files[file_0]"]:not([disabled])', filePath)
+              .waitTillElementPresent('[name="file[0][description]"]', 5000)
+              .setValueAndChange('[name="file[0][description]"]', 'File description');
           }
         })
         .savefullScreenShot('01', langprefix)
@@ -99,7 +99,7 @@ module.exports = {
               // Upload invalid image.
               .waitTillElementPresent('[name="files[image_0]"]:not([disabled])', 5000)
               .setValueAndChange('[name="files[image_0]"]', imageInvalidPath)
-              .waitTillElementPresent('[name="files[image_0]"].error', 5000)
+              .waitTillElementPresent('[name="files[image_0]"].error', 5000);
           }
         })
         // Create 'Error' screenshot.
