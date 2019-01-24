@@ -26,7 +26,7 @@
       $('.ajax-progress-canvas, .ajax-progress-small-canvas', context).once('progressProgressTest').each(function () {
         var id = $(this).uniqueId().attr('id');
         var progressBar = new Drupal.ProgressBar(
-          `progress-test-progress--${id}`,
+          'progress-test-progress--' + id,
           $.noop,
           'replaceAll',
           $.noop
