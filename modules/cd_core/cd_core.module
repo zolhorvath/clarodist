@@ -27,7 +27,7 @@ function template_preprocess_layout__side_by_side(&$variables) {
 function _cd_core_prerender_sbs($region) {
   foreach (Element::children($region) as $item_key) {
     $region[$item_key]['#theme_wrappers']['container__sbs_item'] = [
-      '#attributes' => ['data-region' => $region[$item_key]['#group']],
+      '#attributes' => ['data-region' => $region[$item_key]['#group'] ?? 'main'],
     ];
   }
 
