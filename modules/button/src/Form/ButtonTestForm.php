@@ -82,18 +82,27 @@ class ButtonTestForm extends FormBase {
         '#type' => 'submit',
         '#value' => $this->t('Primary'),
         '#button_type' => 'primary',
-        '#attributes' => ['class' => $value['extra_classes'] ?? []],
+        '#attributes' => [
+          'class' => $value['extra_classes'] ?? [],
+          'tabindex' => 1,
+        ],
       ];
       $form[$key][$key . '_actions']['danger'] = [
         '#type' => 'button',
         '#value' => $this->t('Danger'),
         '#button_type' => 'danger',
-        '#attributes' => ['class' => $value['extra_classes'] ?? []],
+        '#attributes' => [
+          'class' => $value['extra_classes'] ?? [],
+          'tabindex' => 1,
+        ],
       ];
       $form[$key][$key . '_actions']['cancel'] = [
         '#type' => 'button',
         '#value' => $this->t('Default'),
-        '#attributes' => ['class' => $value['extra_classes'] ?? []],
+        '#attributes' => [
+          'class' => $value['extra_classes'] ?? [],
+          'tabindex' => 1,
+        ],
       ];
     }
 

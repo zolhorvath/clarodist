@@ -1,0 +1,9 @@
+clarodist.dashboard:
+  path: '/admin/modules/clarodist-dashboard'
+  defaults:
+    _form: '\Drupal\clarodist\Form\DashboardForm'
+    _title: 'Claro Distribution Dashboard'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer modules'

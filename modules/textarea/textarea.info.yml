@@ -1,10 +1,11 @@
-name: 'Textarea test form'
+name: 'Textarea Test'
 type: module
 description: 'Test form for plain and formatted textarea form items'
 core: 8.x
 package: Claro
+claro_test: true
 dependencies:
   - drupal:contact
   - drupal:text
-  - drupal:editor
+  - drupal:ckeditor
   - clarodist:cd_core

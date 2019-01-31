@@ -10,7 +10,7 @@ dependencies:
     - claro
 id: claro_main_navigation
 theme: claro
-region: header
+region: breadcrumb
 weight: -4
 provider: null
 plugin: 'system_menu_block:main'

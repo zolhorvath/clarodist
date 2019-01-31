@@ -1,8 +1,9 @@
-name: 'Text test form'
+name: 'Textfield Test'
 type: module
 description: 'Test form for text-like form items'
 core: 8.x
 package: Claro
+claro_test: true
 dependencies:
   - drupal:contact
   - drupal:datetime

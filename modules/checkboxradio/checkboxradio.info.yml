@@ -1,8 +1,9 @@
-name: 'Checkboxes and radio test form'
+name: 'Checkbox and Radio'
 type: module
 description: 'Test form for checkboxes and radios'
 core: 8.x
 package: Claro
+claro_test: true
 dependencies:
   - drupal:contact
   - drupal:options

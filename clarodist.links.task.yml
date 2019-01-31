@@ -1,0 +1,5 @@
+clarodist.dashboard:
+  route_name: clarodist.dashboard
+  base_route: system.modules_list
+  title: 'Claro Dashboard'
+  weight: -101
