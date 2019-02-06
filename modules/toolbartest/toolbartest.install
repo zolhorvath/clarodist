@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for Textarea module.
+ */
+
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_install().
+ */
+function toolbartest_install() {
+  $perms = _toolbartest_permissions();
+
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, $perms);
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, $perms);
+}
+
+/**
+ * Implements hook_install().
+ */
+function toolbartest_uninstall() {
+  $perms = _toolbartest_permissions();
+
+  user_role_revoke_permissions(RoleInterface::ANONYMOUS_ID, $perms);
+  user_role_revoke_permissions(RoleInterface::AUTHENTICATED_ID, $perms);
+}
+
+/**
+ * Provides list of permissions that makes toolbar testable without login.
+ */
+function _toolbartest_permissions() {
+  return [
+    'access administration pages',
+    'access content overview',
+    'access files overview',
+    'access shortcuts',
+    'access site reports',
+    'access taxonomy overview',
+    'access toolbar test routes',
+    'access toolbar',
+    'access tour',
+  ];
+}

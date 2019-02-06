@@ -1,0 +1,24 @@
+toolbartest.dummy:
+  title: 'Dummy parent'
+  route_name: toolbartest.dummy
+  description: 'A dummy parent menu link'
+  parent: system.admin_content
+  weight: 1
+
+toolbartest.dummy_child_1:
+  title: 'Dummy #1'
+  route_name: toolbartest.dummy_child_1
+  description: 'A dummy child item'
+  parent: toolbartest.dummy
+
+toolbartest.dummy_child_2:
+  title: 'Dummy #2'
+  route_name: toolbartest.dummy_child_2
+  description: 'A dummy child item'
+  parent: toolbartest.dummy
+
+toolbartest.dummy_child_3:
+  title: 'Dummy #3'
+  route_name: toolbartest.dummy_child_3
+  description: 'A dummy child item'
+  parent: toolbartest.dummy

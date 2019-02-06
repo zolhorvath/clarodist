@@ -4,8 +4,8 @@ dependencies:
   config:
     - system.menu.main
   module:
+    - cd_core
     - system
-    - user
   theme:
     - claro
 id: claro_main_navigation
@@ -22,10 +22,9 @@ settings:
   level: 1
   depth: 0
 visibility:
-  user_role:
-    id: user_role
-    roles:
-      anonymous: anonymous
-    negate: false
+  toolbar_access:
+    id: toolbar_access
+    status: true
+    negate: true
     context_mapping:
-      user: '@user.current_user_context:current_user'
+      current_user: '@user.current_user_context:current_user'

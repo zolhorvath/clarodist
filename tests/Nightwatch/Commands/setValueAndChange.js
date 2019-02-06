@@ -81,7 +81,7 @@ exports.command = function setValueAndChange(cssSelector, value = '', callback) 
                       // Dispatch the change.
                       document.querySelector(arguments[0]).dispatchEvent(new Event('change'));
                     },
-                    [cssSelector, value ]
+                    [cssSelector, value]
                   );
             }
           });

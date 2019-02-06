@@ -1,0 +1,7 @@
+condition.plugin.toolbar_access:
+  type: condition.plugin
+  label: 'Toolbar access'
+  mapping:
+    status:
+      type: boolean
+      label: Status

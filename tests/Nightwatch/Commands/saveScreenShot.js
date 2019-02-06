@@ -21,7 +21,7 @@ exports.command = function savefullScreenShot(
   nameSuffix = '',
   name = '',
   override = (typeof this.globals.fullScreenShotOverride !== 'undefined' ?
-    this.globals.fullScreenShotOverride : true),
+    this.globals.fullScreenShotOverride : true)
 ) {
 
   const _self = this;
@@ -52,8 +52,6 @@ exports.command = function savefullScreenShot(
     }
     fileNameWithPath += `_${index}`;
   }
-
-  const documentElementTag = platformName === 'iOS' ? 'body' : 'html';
 
   this
     .saveScreenshot(fileNameWithPath + '.png')

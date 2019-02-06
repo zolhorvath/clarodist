@@ -105,6 +105,7 @@ class DashboardForm extends FormBase {
       $form['claro_components'] = [
         '#type' => 'table',
         '#tableselect' => TRUE,
+        '#caption' => $this->t('Claro Test Modules'),
         '#header' => [
           $this->t('Status'),
           $this->t('Name'),

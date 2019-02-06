@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const imageMerge = require('merge-img');
 
 /**
  * Create and save a full-page 'screen' capture.
@@ -26,7 +25,7 @@ exports.command = function savefullScreenShot(
   override = (typeof this.globals.fullScreenShotOverride !== 'undefined' ?
     this.globals.fullScreenShotOverride : true),
   pieceShots = (typeof this.globals.fullScreenShotPieces !== 'undefined' ?
-    this.globals.fullScreenShotPieces : false),
+    this.globals.fullScreenShotPieces : false)
 ) {
 
   const _self = this;
@@ -87,7 +86,7 @@ exports.command = function savefullScreenShot(
         if (!windowSizeResult.errorStatus) {
           windowDimensions = windowSizeResult.value;
         }
-      })
+      });
     })
     // Get dimensions of the viewport.
     .execute(
@@ -108,8 +107,8 @@ exports.command = function savefullScreenShot(
       function () {
         // Return actual scroll position difference.
         return {
-          x: ((window.pageXOffset || document.documentElement.scrollLeft)  - (document.documentElement.clientLeft || 0)),
-          y: ((window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0))
+          x: ((window.pageXOffset || document.documentElement.scrollLeft) - (document.documentElement.clientLeft || 0)),
+          y: ((window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0))
         };
       },
       [],
@@ -127,56 +126,57 @@ exports.command = function savefullScreenShot(
         let shotSet = [];
         let offsetY = 0;
 
-        this.perform(() => {
-          Array.from(Array(steps).keys()).forEach(function(step) {
-            this
-              .execute(
-                function () {
-                  // Scroll.
-                  window.scroll(0, arguments[0]);
-                  // Return actual scroll position difference.
-                  return arguments[0] - ((window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0));
-                },
-                [(step * viewportDimensions.height)],
-                function (diff) {
-                  offsetY = !diff.errorStatus ? diff.value : 0;
-                }
-              )
-              .pause(50)
-              .perform(() => {
-                const src = path.join(fileNameWithPath, `${step + 1}--${viewportDimensions.width}x${viewportDimensions.height}--${offsetY}.png`);
-                shotSet.push({
-                  src: src,
-                  offsetY: offsetY
+        this
+          .perform(() => {
+            Array.from(Array(steps).keys()).forEach(function (step) {
+              this
+                .execute(
+                  function () {
+                    // Scroll.
+                    window.scroll(0, arguments[0]);
+                    // Return actual scroll position difference.
+                    return arguments[0] - ((window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0));
+                  },
+                  [(step * viewportDimensions.height)],
+                  function (diff) {
+                    offsetY = !diff.errorStatus ? diff.value : 0;
+                  }
+                )
+                .pause(50)
+                .perform(() => {
+                  const src = path.join(fileNameWithPath, `${step + 1}--${viewportDimensions.width}x${viewportDimensions.height}--${offsetY}.png`);
+                  shotSet.push({
+                    src: src,
+                    offsetY: offsetY
+                  });
+                  this.saveScreenshot(src);
                 });
-                this.saveScreenshot(src);
-              });
-          }, this);
-        // We wound merge images here, but Nightwatch cannot handle promises
-        // right now.
-        // })
-        // .perform(() => {
-        //   // Merge shot pieces.
-        //   console.log(`Attempt to write ${fileNameWithPath}.png`);
-        //   imageMerge(shotSet, { direction: true }).then((fullShot) => {
-        //     // Save image as file
-        //     fullShot.write(fileNameWithPath + '.png', () => {
-        //       // Remove stale shot pieces and their directory.
-        //       shotSet.forEach((item) => {
-        //         fs.unlinkSync(item.src);
-        //       });
-        //       fs.rmdirSync(fileNameWithPath);
-        //       console.log(`Written ${fileNameWithPath}.png`);
-        //     });
-        //   }).catch((err) => {
-        //     console.log(err);
-        //   });
-        //   this.pause(5000); // Give some time for Jimp to merge and write image.
-        })
-        .execute(function () {
-          // Scroll back to the initial position.
-          window.scroll(arguments[0], arguments[1]);
-        }, [initialScrollPos.x, initialScrollPos.y]);
+            }, this);
+          })
+          // We wound merge images here, but Nightwatch cannot handle promises
+          // right now.
+          // .perform(() => {
+          //   // Merge shot pieces.
+          //   console.log(`Attempt to write ${fileNameWithPath}.png`);
+          //   imageMerge(shotSet, { direction: true }).then((fullShot) => {
+          //     // Save image as file
+          //     fullShot.write(fileNameWithPath + '.png', () => {
+          //       // Remove stale shot pieces and their directory.
+          //       shotSet.forEach((item) => {
+          //         fs.unlinkSync(item.src);
+          //       });
+          //       fs.rmdirSync(fileNameWithPath);
+          //       console.log(`Written ${fileNameWithPath}.png`);
+          //     });
+          //   }).catch((err) => {
+          //     console.log(err);
+          //   });
+          //   this.pause(5000); // Give some time for Jimp to merge and write image.
+          // })
+          .execute(function () {
+            // Scroll back to the initial position.
+            window.scroll(arguments[0], arguments[1]);
+          }, [initialScrollPos.x, initialScrollPos.y]);
       }
     })
     // Try to create a singe full page screenshot by resizing the whole browser
@@ -185,28 +185,31 @@ exports.command = function savefullScreenShot(
     .perform(() => {
       if (!pieceShots && windowDimensions.height) {
         // Resize the browser window to make document fit into.
-        this.resizeWindow(
-          Math.floor(
-            documentDimensions.width +
-            // Add diff between the viewPort and window width.
-            (windowDimensions.width - viewportDimensions.width)
-          ),
-          Math.floor(
-            documentDimensions.height +
-            // Add diff between the viewPort and window height.
-            (windowDimensions.height - viewportDimensions.height)
-          ),
-          () => {
-            this.saveScreenshot(fileNameWithPath + '.png');
-          }).perform(() => {
+        this
+          .resizeWindow(
+            Math.floor(
+              documentDimensions.width +
+              // Add diff between the viewPort and window width.
+              (windowDimensions.width - viewportDimensions.width)
+            ),
+            Math.floor(
+              documentDimensions.height +
+              // Add diff between the viewPort and window height.
+              (windowDimensions.height - viewportDimensions.height)
+            ),
+            () => {
+              this.saveScreenshot(fileNameWithPath + '.png');
+            }
+          )
+          .perform(() => {
             // Restore original window dimensions.
             if (windowDimensions.width && windowDimensions.height) {
               this
-              .resizeWindow(windowDimensions.width, windowDimensions.height)
-              .execute(function () {
-                // Scroll to initial.
-                window.scroll(arguments[0], arguments[1]);
-              }, [initialScrollPos.x, initialScrollPos.y]);
+                .resizeWindow(windowDimensions.width, windowDimensions.height)
+                .execute(function () {
+                  // Scroll to initial.
+                  window.scroll(arguments[0], arguments[1]);
+                }, [initialScrollPos.x, initialScrollPos.y]);
             }
           });
       }

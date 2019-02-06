@@ -13,15 +13,15 @@ exports.command = function setDateValue(cssSelector, callback) {
   const _self = this;
   this
     .execute(function () {
-        try {
-          // Chrome throws error on this...
-          document.querySelector(arguments[0]).focus(false);
-        }
-        catch (e) {
-          document.querySelector(arguments[0]).focus();
-        }
-      },
-      [cssSelector]
+      try {
+        // Chrome throws error on this...
+        document.querySelector(arguments[0]).focus(false);
+      }
+      catch (e) {
+        document.querySelector(arguments[0]).focus();
+      }
+    },
+    [cssSelector]
     );
   if (typeof callback === 'function') {
     callback.call(_self);

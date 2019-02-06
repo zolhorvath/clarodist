@@ -35,31 +35,31 @@ module.exports = {
           }
         })
         .waitTillElementPresent('.compact-link > a[href*="admin/compact/on?"]')
-        .savefullScreenShot('01-config-expanded', langprefix)
+        .savefullScreenShot('01', langprefix, 'Navigation config expanded')
         // Switch to compact mode.
         .click('.compact-link a[href*="admin/compact/on?"]')
         .waitTillElementPresent('.compact-link > a[href*="admin/compact?"]')
-        .savefullScreenShot('02-config-compact', langprefix)
+        .savefullScreenShot('02', langprefix, 'Navigation config compact')
         //
         // Admin tasks (compact first).
         //
         .smartURL((langprefix ? '/' + langprefix : '') + '/admin')
         .waitTillElementPresent('.compact-link > a[href*="admin/compact?"]')
-        .savefullScreenShot('04-tasks-compact', langprefix)
+        .savefullScreenShot('04', langprefix, 'Navigation tasks compact')
         // Expanded.
         .click('.compact-link a[href*="admin/compact?"]')
         .waitTillElementPresent('.compact-link > a[href*="admin/compact/on?"]')
-        .savefullScreenShot('03-tasks-expanded', langprefix)
+        .savefullScreenShot('03', langprefix, 'Navigation tasks expanded')
         //
         // Admin index (expanded mode).
         //
         .smartURL((langprefix ? '/' + langprefix : '') + '/admin/index')
         .waitTillElementPresent('.compact-link > a[href*="admin/compact/on?"]')
-        .savefullScreenShot('05-index-expanded', langprefix)
+        .savefullScreenShot('05', langprefix, 'Navigation index expanded')
         // Compact.
         .click('.compact-link > a[href*="admin/compact/on?"]')
         .waitTillElementPresent('.compact-link > a[href*="admin/compact?"]')
-        .savefullScreenShot('06-index-compact', langprefix)
+        .savefullScreenShot('06', langprefix, 'Navigation index compact')
         // Switching off compact mode for further tests.
         .click('.compact-link a[href*="admin/compact?"]');
     });
