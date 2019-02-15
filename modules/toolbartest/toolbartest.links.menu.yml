@@ -22,3 +22,22 @@ toolbartest.dummy_child_3:
   route_name: toolbartest.dummy_child_3
   description: 'A dummy child item'
   parent: toolbartest.dummy
+
+toolbartest.filter_tips_all:
+  title: 'Filter tips'
+  route_name: toolbartest.filter_tips_all
+  description: 'An another dummy toolbar menu link'
+  parent: system.admin_content
+  weight: 2
+
+toolbartest.filter_tips:
+  class: Drupal\Core\Menu\MenuLinkDefault
+  deriver: Drupal\toolbartest\Plugin\Derivative\DummyMenuLinkDeriver
+  route_name: toolbartest.filter_tips
+  parent: toolbartest.filter_tips_all
+
+toolbartest.dummy_child_1_tips:
+  class: Drupal\Core\Menu\MenuLinkDefault
+  deriver: Drupal\toolbartest\Plugin\Derivative\DummyMenuLinkDeriver
+  route_name: toolbartest.dummy_filter_tip
+  parent: toolbartest.dummy_child_2
