@@ -3,3 +3,9 @@ clarodist.front_page:
   route_name: '<front>'
   weight: 0
   menu_name: main
+clarodist.dashboard:
+  title: 'Claro test module dashboard'
+  route_name: clarodist.dashboard
+  description: 'Dashboard of Claro test modules'
+  parent: system.modules_list
+  weight: 1

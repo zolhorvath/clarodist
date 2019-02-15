@@ -107,10 +107,21 @@ class DashboardForm extends FormBase {
         '#tableselect' => TRUE,
         '#caption' => $this->t('Claro Test Modules'),
         '#header' => [
-          $this->t('Status'),
-          $this->t('Name'),
-          $this->t('Description'),
-          $this->t('Operations'),
+          [
+            'data' => $this->t('Status'),
+            'class' => [RESPONSIVE_PRIORITY_MEDIUM],
+          ],
+          [
+            'data' => $this->t('Name'),
+          ],
+          [
+            'data' => $this->t('Description'),
+            'class' => [RESPONSIVE_PRIORITY_LOW],
+          ],
+          [
+            'data' => $this->t('Operations'),
+            'class' => [RESPONSIVE_PRIORITY_MEDIUM],
+          ],
         ],
       ];
 

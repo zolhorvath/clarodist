@@ -7,3 +7,4 @@ claro_test: true
 dependencies:
   - drupal:filter
   - drupal:toolbar
+  - drupal:shortcut
