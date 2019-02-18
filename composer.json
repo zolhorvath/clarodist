@@ -3,6 +3,12 @@
     "description": "Drupal 8 distribution for Claro development",
     "type": "drupal-profile",
     "license": "GPL-2.0-or-later",
+    "repositories": {
+        "zolhorvath/pager": {
+            "type": "github",
+            "url": "git@github.com:zolhorvath/pager.git"
+        }
+    },
     "authors": [
         {
             "name": "Zoltan Horvath",
@@ -11,8 +17,7 @@
         }
     ],
     "require": {
-        "drupal/styleguide": "^1.0.0-alpha3"
-    },
-    "require-dev": {
+        "drupal/styleguide": "^1.0.0-alpha3",
+        "zolhorvath/pager": "^1.0"
     }
 }
