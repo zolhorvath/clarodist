@@ -61,3 +61,11 @@ toolbartest.dummy_filter_tip:
     _title: 'Compose tips'
   requirements:
     _permission: 'access toolbar test routes'
+
+toolbartest.index:
+  path: '/filter'
+  defaults:
+    _title: 'Filters index'
+    _controller: '\Drupal\filter\Controller\FilterController::filterTips'
+  requirements:
+    _permission: 'access toolbar test routes'

@@ -45,12 +45,13 @@ function _toolbartest_form_submit(&$form, FormStateInterface $form_state) {
  */
 function _toolbartest_unsafe_forms() {
   return [
-    'system_themes_admin_form' => 'administer themes',
-    'language_admin_overview_form' => 'administer languages',
-    'language_negotiation_configure_form' => 'administer languages',
-    'language_content_settings_form' => 'administer languages',
-    'system_regional_settings' => 'administer site configuration',
-    'system_modules' => 'administer modules',
+    'clarodist_dashboard_form' => 'administer modules',
     'comment_admin_overview' => 'administer comments',
+    'language_admin_overview_form' => 'administer languages',
+    'language_content_settings_form' => 'administer languages',
+    'language_negotiation_configure_form' => 'administer languages',
+    'system_modules' => 'administer modules',
+    'system_regional_settings' => 'administer site configuration',
+    'system_themes_admin_form' => 'administer themes',
   ];
 }

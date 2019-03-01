@@ -16,6 +16,7 @@ class RouteSubscriber extends RouteSubscriberBase {
    */
   protected function alterRoutes(RouteCollection $collection) {
     $overview_routes = [
+      'clarodist.dashboard',
       'comment.admin',
       'entity.configurable_language.collection',
       'entity.user.collection',

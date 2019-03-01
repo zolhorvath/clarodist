@@ -41,3 +41,10 @@ toolbartest.dummy_child_1_tips:
   deriver: Drupal\toolbartest\Plugin\Derivative\DummyMenuLinkDeriver
   route_name: toolbartest.dummy_filter_tip
   parent: toolbartest.dummy_child_2
+
+toolbartest.index:
+  title: 'Dummy task index page'
+  route_name: toolbartest.index
+  description: 'A dummy parent menu link'
+  parent: system.admin
+  weight: 3
