@@ -28,7 +28,7 @@ module.exports = {
         .smartURL((langprefix ? '/' + langprefix : '') + '/buttons')
         .waitForElementVisible('.sbs-layout__region--main', 5000)
         .elements('css selector', '.sbs-layout__region--main .button', (result) => {
-          let i = 1;
+          let i = 2;
           result.value.forEach(elem => {
             browser.perform(done => {
               i++;
@@ -44,7 +44,10 @@ module.exports = {
             });
           });
         })
-        .savefullScreenShot('01', langprefix);
+        .savefullScreenShot('01', langprefix)
+        .smartURL((langprefix ? '/' + langprefix : '') + '/buttons/disabled')
+        .waitForElementVisible('.sbs-layout__region--main', 5000)
+        .savefullScreenShot('02', langprefix);
     });
   }
 };
