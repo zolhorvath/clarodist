@@ -50,7 +50,8 @@ class ButtonTestForm extends FormBase {
   /**
    * Returns a renderable array for a test page.
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state, $disabled = FALSE) {
+
     //
     // Buttons.
     //
@@ -86,6 +87,7 @@ class ButtonTestForm extends FormBase {
           'class' => $value['extra_classes'] ?? [],
           'tabindex' => 1,
         ],
+        '#disabled' => $disabled,
       ];
       $form[$key][$key . '_actions']['danger'] = [
         '#type' => 'button',
@@ -95,6 +97,7 @@ class ButtonTestForm extends FormBase {
           'class' => $value['extra_classes'] ?? [],
           'tabindex' => 1,
         ],
+        '#disabled' => $disabled,
       ];
       $form[$key][$key . '_actions']['cancel'] = [
         '#type' => 'button',
@@ -103,6 +106,7 @@ class ButtonTestForm extends FormBase {
           'class' => $value['extra_classes'] ?? [],
           'tabindex' => 1,
         ],
+        '#disabled' => $disabled,
       ];
     }
 
@@ -113,11 +117,17 @@ class ButtonTestForm extends FormBase {
       'links_default' => [
         'title' => $this->t('Links as buttons'),
         'weight' => 1,
+        'extra_classes' => [
+          $disabled ? 'is-disabled' : NULL,
+        ],
       ],
       'links_small' => [
         'title' => $this->t('Links as small buttons'),
         'weight' => 3,
-        'extra_classes' => ['button--small'],
+        'extra_classes' => [
+          'button--small',
+          $disabled ? 'is-disabled' : NULL,
+        ],
       ],
     ];
     foreach ($links as $key => $value) {
