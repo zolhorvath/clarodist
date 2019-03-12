@@ -21,5 +21,8 @@
     },
     "suggest": {
         "zolhorvath/pager": "^1.0"
+    },
+    "conflict": {
+        "twig/twig": "1.38.0"
     }
 }
