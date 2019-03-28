@@ -29,6 +29,13 @@ class DashboardForm extends FormBase {
   protected $moduleInstaller;
 
   /**
+   * All modules.
+   *
+   * @var \Drupal\Core\Extension\Extension[]
+   */
+  protected $modules;
+
+  /**
    * Claro Distribution test modules.
    *
    * @var \Drupal\Core\Extension\Extension[]
@@ -69,6 +76,7 @@ class DashboardForm extends FormBase {
       $this->messenger()->addError($this->t('Modules could not be listed due to an error: %error', ['%error' => $e->getMessage()]));
       $modules = [];
     }
+    $this->modules = $modules;
     $this->claroTestModules = array_filter(
       $modules,
       function ($extension) {
@@ -94,10 +102,17 @@ class DashboardForm extends FormBase {
         return $extension->status;
       }
     );
-    $disabled_modules = array_filter(
+    $installable_modules = array_filter(
       $this->claroTestModules,
       function ($extension) {
-        return !$extension->status;
+        $installable = TRUE;
+        foreach ($extension->requires as $dependency => $dependency_object) {
+          if (!isset($this->modules[$dependency])) {
+            $installable = FALSE;
+            break;
+          }
+        }
+        return !$extension->status && $installable;
       }
     );
 
@@ -127,14 +142,25 @@ class DashboardForm extends FormBase {
 
       foreach ($this->claroTestModules as $name => $extension) {
         $enabled = $extension->status;
+        $locked = FALSE;
+        // If this module requires other modules, check their availability.
+        /** @var \Drupal\Core\Extension\Dependency $dependency_object */
+        foreach ($extension->requires as $dependency => $dependency_object) {
+          if (!isset($this->modules[$dependency])) {
+            $locked = TRUE;
+            break;
+          }
+        }
+
         $form['claro_components'][$name] = [
+          '#disabled' => $locked,
           '#attributes' => [
             'class' => $enabled ? ['color-success'] : [],
           ],
           'status' => [
             '#type' => 'html_tag',
             '#tag' => $enabled ? 'strong' : 'span',
-            '#value' => $enabled ? $this->t('Enabled') : $this->t('Disabled'),
+            '#value' => $locked ? $this->t('Missing dependency') : ($enabled ? $this->t('Enabled') : $this->t('Disabled')),
           ],
           'name' => [
             '#type' => 'html_tag',
@@ -153,10 +179,11 @@ class DashboardForm extends FormBase {
             '#type' => 'submit',
             '#name' => $name,
             '#module' => $name,
-            '#operation' => $enabled ? 'uninstall' : 'install',
+            '#operation' => !$locked && $enabled ? 'uninstall' : 'install',
             '#button_type' => 'small',
-            '#value' => $enabled ? $this->t('Uninstall') : $this->t('Install'),
+            '#value' => $locked ? $this->t('Disabled') : ($enabled ? $this->t('Uninstall') : $this->t('Install')),
             '#submit' => [[$this, 'operationSubmit']],
+            '#disabled' => $locked,
           ],
         ];
       }
@@ -176,7 +203,7 @@ class DashboardForm extends FormBase {
       '#type' => 'submit',
       '#op' => 'enable',
       '#value' => $this->t('Enable all'),
-      '#disabled' => empty($disabled_modules),
+      '#disabled' => empty($installable_modules),
       '#submit' => [[$this, 'bulkEnableSubmit']],
     ];
     $form['actions']['disable'] = [
@@ -233,6 +260,16 @@ class DashboardForm extends FormBase {
 
     if (!empty($modules_to_enable)) {
       array_walk($modules_to_enable, $name_walk_callback, $this->claroTestModules);
+      // Filter out modules with missing dependecy.
+      foreach (array_keys($modules_to_enable) as $module) {
+        // If this module requires other modules, check their availability.
+        /** @var \Drupal\Core\Extension\Dependency $dependency_object */
+        foreach ($this->claroTestModules[$module]->requires as $dependency => $dependency_object) {
+          if (!isset($this->modules[$dependency])) {
+            unset($modules_to_enable[$module]);
+          }
+        }
+      }
 
       if ($success_install = $this->moduleInstaller->install(array_keys($modules_to_enable))) {
         $this->messenger()->addStatus($this->installMessage($modules_to_enable));
@@ -288,11 +325,24 @@ class DashboardForm extends FormBase {
       }
     );
 
-    if ($this->moduleInstaller->install(array_keys($modules_to_enable))) {
-      $this->messenger()->addStatus($this->t('Every Claro test module is installed.'));
+    // Filter out modules with missing dependecy.
+    foreach (array_keys($modules_to_enable) as $module) {
+      // If this module requires other modules, check their availability.
+      /** @var \Drupal\Core\Extension\Dependency $dependency_object */
+      foreach ($this->claroTestModules[$module]->requires as $dependency => $dependency_object) {
+        if (!isset($this->modules[$dependency])) {
+          unset($modules_to_enable[$module]);
+        }
+      }
     }
-    else {
-      $this->messenger()->addError($this->installErrorMessage());
+
+    if (!empty($modules_to_enable)) {
+      if ($this->moduleInstaller->install(array_keys($modules_to_enable))) {
+        $this->messenger()->addStatus($this->t('Every Claro test module is installed.'));
+      }
+      else {
+        $this->messenger()->addError($this->installErrorMessage());
+      }
     }
   }
 

@@ -23,6 +23,6 @@
         "zolhorvath/pager": "^1.0"
     },
     "conflict": {
-        "twig/twig": "1.38.0 || 1.38.1 || 1.38.2"
+        "twig/twig": "1.38.0 || 1.38.1"
     }
 }

@@ -48,6 +48,8 @@ function clarodist_install() {
     'access site-wide contact form',
   ]);
 
+  // Set up default and admin theme.
+  // If Claro is available, user that, if not, use Seven.
   $theme = 'seven';
   $themes_available = \Drupal::service('theme_handler')->rebuildThemeData();
 
@@ -62,4 +64,28 @@ function clarodist_install() {
     ->set('admin', $theme)
     ->set('default', $theme)
     ->save();
+}
+
+/**
+ * Implements hook_install_tasks().
+ */
+function clarodist_install_tasks(&$install_state) {
+  return ['clarodist_optional_module_install' => []];
+}
+
+/**
+ * Enable Clarodist core module if it is available.
+ *
+ * Since at this state Clarodist will be installed, the modules_installed hook
+ * implemented in the profile file will update block visibility conditions.
+ */
+function clarodist_optional_module_install() {
+  $modules = \Drupal::service('extension.list.module')->reset()->getList();
+
+  if (
+    !\Drupal::moduleHandler()->moduleExists('cd_core')
+    && in_array('cd_core', array_keys($modules))
+  ) {
+    \Drupal::service('module_installer')->install(['cd_core']);
+  }
 }

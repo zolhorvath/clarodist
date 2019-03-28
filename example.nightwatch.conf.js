@@ -26,19 +26,15 @@ module.exports = ((settings) => {
   // If this is not defined or is not false then the generated pngs get
   // overridden on each test run.
   settings.test_settings.default.globals.fullScreenShotOverride = true;
-  // Don't produce pieces.
-  settings.test_settings.default.globals.fullScreenShotPieces = false;
+  // Whether produce pieces or not (useful for mobile and some non-headless
+  // browsers).
+  settings.test_settings.default.globals.fullScreenShotPieces = true;
 
-  // const customIp = '127.0.0.1';
-  // const customIp = '192.168.0.102';
   const customIp = '172.16.0.189';
   const ip = ips[0] || customIp;
 
-  console.info('Current host IP:', ip);
-
   settings.test_settings.default.selenium_host = ip;
-  // Customize test site url.
-  settings.test_settings.default.launch_url = `http://${ip}/clarodist/incubator/public_html`;
+  settings.test_settings.default.launch_url = `http://${ip}/clarodist/zdev/public_html`;
 
   // // Custom arguments for Chrome.
   // settings.test_settings.default.desiredCapabilities['goog:chromeOptions'].args = [

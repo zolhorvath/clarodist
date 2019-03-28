@@ -2,7 +2,18 @@
 
 Drupal 8 distribution for Claro theme development
 
-## Getting
+## Getting dependecies
+
+### Clarodist core toolset module
+
+Includes Test node (`cd_node`), Text fixtures (`textfixtures`), Hebrew language
+(`lang_hebrew`) and Dev help (`devhelp`) submodules.
+
+* `composer config repositories.'zolhorvath/cd_core' github
+https://github.com/zolhorvath/cd_core.git`
+* `composer require zolhorvath/cd_core`
+
+## Getting Clarodist
 
 * `composer config repositories.'zolhorvath/clarodist' github
 https://github.com/zolhorvath/clarodist.git`

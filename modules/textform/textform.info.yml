@@ -11,5 +11,5 @@ dependencies:
   - drupal:image
   - drupal:telephone
   - drupal:text
-  - clarodist:cd_core
-  - clarodist:textfixtures
+  - cd_core:cd_core
+  - cd_core:textfixtures

@@ -8,4 +8,4 @@ dependencies:
   - drupal:contact
   - drupal:text
   - drupal:ckeditor
-  - clarodist:cd_core
+  - cd_core:cd_core

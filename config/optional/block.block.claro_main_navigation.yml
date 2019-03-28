@@ -4,7 +4,6 @@ dependencies:
   config:
     - system.menu.main
   module:
-    - cd_core
     - system
   theme:
     - claro
@@ -21,10 +20,4 @@ settings:
   label_display: '0'
   level: 1
   depth: 0
-visibility:
-  toolbar_access:
-    id: toolbar_access
-    status: true
-    negate: true
-    context_mapping:
-      current_user: '@user.current_user_context:current_user'
+visibility: {}

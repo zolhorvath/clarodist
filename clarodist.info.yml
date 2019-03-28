@@ -21,22 +21,22 @@ dependencies:
   - dblog
   - dynamic_page_cache
   - editor
+  - field_layout
   - file
   - help
   - history
   - image
   - inline_form_errors
-  - lang_hebrew
   - menu_link_content
   - menu_ui
   - node
   - options
+  - page_cache
   - path
   - quickedit
   - rdf
   - search
   - shortcut
-  - cd_core
   - styleguide
   - taxonomy
   - telephone
