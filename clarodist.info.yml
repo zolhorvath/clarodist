@@ -31,13 +31,12 @@ dependencies:
   - menu_ui
   - node
   - options
-  - page_cache
+  # - page_cache /admin/compact is broken if Internal page cache is enabled.
   - path
   - quickedit
   - rdf
   - search
   - shortcut
-  - styleguide
   - taxonomy
   - telephone
   - toolbar

@@ -1,9 +1,0 @@
-name: 'Table Test'
-type: module
-description: 'Test pages for table component'
-package: Claro
-core: 8.x
-claro_test: true
-dependencies:
-  - drupal:node
-  - drupal:field_ui

@@ -1,7 +1,0 @@
-table.test:
-  path: '/table'
-  defaults:
-    _form: '\Drupal\table\Form\TableTestForm'
-    _title: 'Table Test'
-  requirements:
-    _permission: 'access content'

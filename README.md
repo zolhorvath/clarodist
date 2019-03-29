@@ -2,9 +2,10 @@
 
 Drupal 8 distribution for Claro theme development
 
+
 ## Getting dependecies
 
-### Clarodist core toolset module
+### Clarodist core
 
 Includes Test node (`cd_node`), Text fixtures (`textfixtures`), Hebrew language
 (`lang_hebrew`) and Dev help (`devhelp`) submodules.
@@ -13,12 +14,23 @@ Includes Test node (`cd_node`), Text fixtures (`textfixtures`), Hebrew language
 https://github.com/zolhorvath/cd_core.git`
 * `composer require zolhorvath/cd_core`
 
+
+### Clarodist tools
+
+Contains dashboard and markup generator modules with nightwatch.js tests.
+
+* `composer config repositories.'zolhorvath/cd_tools' github
+https://github.com/zolhorvath/cd_tools.git`
+* `composer require zolhorvath/cd_tools`
+
+
 ## Getting Clarodist
 
 * `composer config repositories.'zolhorvath/clarodist' github
 https://github.com/zolhorvath/clarodist.git`
 * `composer require zolhorvath/clarodist`
 * `drush si clarodist`
+
 
 ## Automatic webpage captures
 
@@ -35,8 +47,17 @@ https://github.com/zolhorvath/clarodist.git`
   installed (and should be available for Selenium)
 
   Additional environments:
+  * `chrome`
   * `firefox`
   * `safari` [How to enable Safari WebDriver][1]
+  * `chromeLinux`
+  * `firefoxLinux`
+  * `chromeWin`
+  * `firefoxWin`
+  * `ie11`
+  * `edge`
+  * `android` (with Chrome browser)
+  * `iPhone5`
 
   `./node_modules/.bin/nightwatch -e chrome,firefox,safari`
   To create screenshots in every defined env (parallelly).
@@ -44,15 +65,15 @@ https://github.com/zolhorvath/clarodist.git`
   `./node_modules/.bin/nightwatch tests/Nightwatch/Tests/textInputTest.js`
   To run only a single test.
 * Screenshots will be saved to `reports/screenshots/[testName]`.
+* Screenshots merge: `yarn ssmfm`
+
 
 ## Further tools
 
-* __Claro Developer Helper__ `clarodev` module
-  Disables caches and switches on twig debugging. Not enabled by default.
-* [Incubator][1] for Drupal 8 extension development
+* [Incubator][2] for Drupal 8 extension development
   A simple _Grunt Drupal Tasks_-based scaffolding tool what provides a flexible
   local environment for Drupal contrib extension development
 
-[1]: https://gitlab.com/z.a.horvath/incubator
-[2]:
+[1]:
 http://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari
+[2]: https://gitlab.com/z.a.horvath/incubator

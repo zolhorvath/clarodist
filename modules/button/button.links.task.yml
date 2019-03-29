@@ -1,9 +1,0 @@
-button.test:
-  title: Default
-  route_name: button.test
-  base_route: button.test
-
-button.test_disabled:
-  title: Disabled
-  route_name: button.test_disabled
-  base_route: button.test

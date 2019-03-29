@@ -1,5 +1,0 @@
-button.test:
-  title: 'Buttons'
-  route_name: button.test
-  menu_name: main
-  weight: 12

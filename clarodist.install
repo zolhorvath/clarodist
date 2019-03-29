@@ -18,11 +18,6 @@ use Drupal\user\RoleInterface;
 function clarodist_install() {
   $config_factory = \Drupal::service('config.factory');
 
-  // Set front page to "node".
-  $config_factory->getEditable('system.site')
-    ->set('page.front', '/admin/appearance/styleguide')
-    ->save();
-
   // Allow visitor account creation only by administrators.
   $config_factory->getEditable('user.settings')
     ->set('register', USER_REGISTER_ADMINISTRATORS_ONLY)
@@ -38,12 +33,10 @@ function clarodist_install() {
   \Drupal::service('router.builder')->rebuildIfNeeded();
 
   user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, [
-    'view style guides',
     'use text format basic_html',
     'access site-wide contact form',
   ]);
   user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, [
-    'view style guides',
     'use text format basic_html',
     'access site-wide contact form',
   ]);
@@ -74,18 +67,40 @@ function clarodist_install_tasks(&$install_state) {
 }
 
 /**
- * Enable Clarodist core module if it is available.
+ * Enables cd_core and cd_tools modules if they are available.
  *
  * Since at this state Clarodist will be installed, the modules_installed hook
- * implemented in the profile file will update block visibility conditions.
+ * implemented in the profile will update block visibility conditions.
  */
 function clarodist_optional_module_install() {
   $modules = \Drupal::service('extension.list.module')->reset()->getList();
+  $module_handler = \Drupal::moduleHandler();
+  $modules_to_install = [];
 
+  // Cd tools module.
   if (
-    !\Drupal::moduleHandler()->moduleExists('cd_core')
-    && in_array('cd_core', array_keys($modules))
+    in_array('cd_tools', array_keys($modules))
+    && !$module_handler->moduleExists('cd_tools')
   ) {
-    \Drupal::service('module_installer')->install(['cd_core']);
+    $modules_to_install[] = 'cd_tools';
+
+    if (
+      in_array('lang_hebrew', array_keys($modules))
+      && !$module_handler->moduleExists('lang_hebrew')
+    ) {
+      $modules_to_install[] = 'lang_hebrew';
+    }
+  }
+
+  // Cd core module.
+  if (
+    in_array('cd_core', array_keys($modules))
+    && !$module_handler->moduleExists('cd_core')
+  ) {
+    $modules_to_install[] = 'cd_core';
+  }
+
+  if (!empty($modules_to_install)) {
+    \Drupal::service('module_installer')->install($modules_to_install);
   }
 }
