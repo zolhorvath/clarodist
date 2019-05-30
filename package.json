@@ -3,7 +3,8 @@
     "ssm": "node ./scripts/screenshotMerge.js",
     "ssf": "node ./scripts/screenshotFix.js",
     "sso": "node ./scripts/screenshotOrganize.js",
-    "ssmfm": "node ./scripts/screenshotMerge.js && node ./scripts/screenshotFix.js && node ./scripts/screenshotMerge.js --fixed-only && node ./scripts/screenshotOrganize.js"
+    "ssmfm": "node ./scripts/screenshotMerge.js && node ./scripts/screenshotFix.js && node ./scripts/screenshotMerge.js --fixed-only && node ./scripts/screenshotOrganize.js",
+    "ssfs": "node ./scripts/screenshotsFlattenStructure.js"
   },
   "devDependencies": {
     "archiver": "^3.0.0",

@@ -6,7 +6,7 @@
 const path = require('path');
 const fs = require('fs');
 const screenshotsMainPath = path.join((process.env.PWD || process.cwd()), 'reports', 'screenshots');
-const shotDirs = fs.readdirSync(screenshotsMainPath).filter(dirent => { return fs.lstatSync(path.join(screenshotsMainPath, dirent)).isDirectory() && ['_processed', '_fixed'].indexOf(dirent) < 0; });
+const shotDirs = fs.readdirSync(screenshotsMainPath).filter(dirent => { return fs.lstatSync(path.join(screenshotsMainPath, dirent)).isDirectory() && ['_processed', '_temp_fixed', '_flattened', '_fixed'].indexOf(dirent) < 0; });
 
 const imageOrganize = () => {
   Array.from(shotDirs).forEach((rootDir) => {

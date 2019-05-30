@@ -9,7 +9,7 @@ const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
 const screenshotsMainPath = path.join((process.env.PWD || process.cwd()), 'reports', 'screenshots');
-const shotsetDirs = fs.readdirSync(screenshotsMainPath).filter(dirent => fs.lstatSync(path.join(screenshotsMainPath, dirent)).isDirectory() && dirent !== '_processed');
+const shotsetDirs = fs.readdirSync(screenshotsMainPath).filter(dirent => fs.lstatSync(path.join(screenshotsMainPath, dirent)).isDirectory() && ['_processed', '_temp_fixed', '_flattened', '_fixed'].indexOf(dirent) < 0);
 const fixPattern = {
   'ios:safari': {
     skipTop: 55.5,
@@ -32,7 +32,7 @@ const shotSetFix = () => {
       platform = platform === 'win8_1' ? 'windows' : platform;
       platform = platform === 'linux' ? 'ubuntu' : platform;
       const browser = (metaPieces[3] || 'no-browser').toLowerCase();
-      const pathComps = [screenshotsMainPath, '_fixed', rootDir, path.basename(set)];
+      const pathComps = [screenshotsMainPath, '_temp_fixed', rootDir, path.basename(set)];
 
       if (fixPattern[`${platform}:${browser}`]) {
         console.log('Fixing set ' + path.basename(set));

@@ -3,7 +3,7 @@
  * Merges screenshot pieces into one image.
  *
  * If '--fixed-only' arg present, it will merge only fixed (iOS Safari) shots
- * located inside the '_fixed' screenshot subdir.
+ * located inside the '_temp_fixed' screenshot subdir.
  */
 
 const imageMerger = require('merge-img');
@@ -12,13 +12,13 @@ const fs = require('fs');
 const Jimp = require('jimp');
 const screenshotsMainPath = path.join((process.env.PWD || process.cwd()), 'reports', 'screenshots');
 const fixedOnly = process.argv.slice(2).indexOf('--fixed-only') > -1;
-const fixedPath = path.join(screenshotsMainPath, '_fixed');
+const fixedPath = path.join(screenshotsMainPath, '_temp_fixed');
 const fixedShotsDirs = fs.existsSync(fixedPath) && fs.lstatSync(fixedPath).isDirectory() ? fs.readdirSync(fixedPath).filter(dirent => { return fs.lstatSync(path.join(fixedPath, dirent)).isDirectory(); }) : [];
-const shotsetDirs = !fixedOnly ? fs.readdirSync(screenshotsMainPath).filter(dirent => { return fs.lstatSync(path.join(screenshotsMainPath, dirent)).isDirectory() && ['_processed', '_fixed'].indexOf(dirent) < 0; }) : fixedShotsDirs;
+const shotsetDirs = !fixedOnly ? fs.readdirSync(screenshotsMainPath).filter(dirent => { return fs.lstatSync(path.join(screenshotsMainPath, dirent)).isDirectory() && ['_processed', '_temp_fixed', '_flattened', '_fixed'].indexOf(dirent) < 0; }) : fixedShotsDirs;
 
 const imageMerge = () => {
   Array.from(shotsetDirs).forEach((rootDir) => {
-    const realSubDir = fixedOnly ? path.join('_fixed', rootDir) : rootDir;
+    const realSubDir = fixedOnly ? path.join('_temp_fixed', rootDir) : rootDir;
     const rootDirAbs = path.join(screenshotsMainPath, realSubDir);
     const dirents = fs.readdirSync(rootDirAbs);
     const sets = dirents.filter((dirent) => fs.lstatSync(path.join(rootDirAbs, dirent)).isDirectory()).map(dirent => path.join(rootDirAbs, dirent));
