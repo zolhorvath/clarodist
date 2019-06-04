@@ -59,7 +59,7 @@ const flattenDirStructure = () => {
     Array.from(files).forEach(filePathOld => {
       fs.copyFile(
         filePathOld,
-        path.join(destPath, path.basename(filePathOld, path.extname(filePathOld))),
+        path.join(destPath, path.basename(filePathOld)),
         (error) => {
           if (error) {
             throw error;
