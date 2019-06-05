@@ -1,0 +1,13 @@
+diff --git a/node_modules/https-proxy-agent/https-proxy-agent.js b/node_modules/https-proxy-agent/https-proxy-agent.js
+index 6baaa9d..93c3ac0 100644
+--- a/node_modules/https-proxy-agent/https-proxy-agent.js
++++ b/node_modules/https-proxy-agent/https-proxy-agent.js
+@@ -193,7 +193,7 @@ function connect (req, opts, fn) {
+   var msg = 'CONNECT ' + hostname + ' HTTP/1.1\r\n';
+   var auth = proxy.auth;
+   if (auth) {
+-    msg += 'Proxy-Authorization: Basic ' + new Buffer(auth).toString('base64') + '\r\n';
++    msg += 'Proxy-Authorization: Basic ' + Buffer.from(auth).toString('base64') + '\r\n';
+   }
+   msg += 'Host: ' + hostname + '\r\n' +
+          'Connection: close\r\n' +
