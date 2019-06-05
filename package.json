@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "postinstall": "patch-package",
     "ssm": "node ./scripts/screenshotMerge.js",
     "ssf": "node ./scripts/screenshotFix.js",
     "sso": "node ./scripts/screenshotOrganize.js",
@@ -9,6 +10,8 @@
   "devDependencies": {
     "archiver": "^3.0.0",
     "merge-img": "^2.1.2",
-    "nightwatch": "^0.9.21"
+    "nightwatch": "^0.9.21",
+    "patch-package": "^6.1.2",
+    "postinstall-postinstall": "^2.0.0"
   }
 }
