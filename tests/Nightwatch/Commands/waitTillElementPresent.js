@@ -11,89 +11,108 @@
  * @return {object}
  *   The 'browser' instance.
  */
-exports.command = function waitTillElementPresent(cssSelector, timeout = 10000) {
-  const _self = this;
-  const now = Date.now();
+exports.command = function waitTillElementPresent(
+  cssSelector,
+  timeout = 10000
+) {
   const checkInterval = 50;
-  timeout = timeout ? Math.ceil(timeout / checkInterval) * checkInterval : checkInterval * 10;
+  timeout = timeout
+    ? Math.ceil(timeout / checkInterval) * checkInterval
+    : checkInterval * 10;
   const steps = timeout / checkInterval;
   let found = false;
-  const method = 'A'; // 'A' works.
-  const multiMessage = process.stdout._type === 'tty';
+  const method = "A"; // "A" works.
+  const multiMessage = process.stdout._type === "tty";
 
   if (multiMessage) {
     process.stdout.write(` 🔍 Waiting for <${cssSelector}> `);
   }
 
-  this.element('css selector', cssSelector, (result) => {
-    if (!(found = ((typeof result.errorStatus) === 'undefined'))) { // Not found.
-      this.pause(1).perform(() => {
-      switch (method) {
-        case 'A':
-          Array.from(Array(steps).keys()).forEach(function(step) {
-            this.element('css selector', cssSelector, (result) => {
-              found = found || (typeof result.errorStatus) === 'undefined';
-              if (!found) {
-                this.perform(() => {
-                  if (multiMessage) {
-                    process.stdout.write('.');
-                  }
-                }).pause(checkInterval);
-              }
-            });
-          }, this);
-          break;
+  this.element("css selector", cssSelector, result => {
+    found = typeof result.errorStatus === "undefined";
 
-        default:
-          // Create loop: calls perform 'steps' times.
-          // The while loop ends immediately, that's why I need the second 'pi'
-          // index.
-          // I still have issues when checkInterval < ~500.
-          let wi = pi = 0;
-          while ((wi < steps) && !found) {
-            this.perform(() => {
-              if ((pi < steps) && !found) {
-                this.element('css selector', cssSelector, (result) => {
-                  // Break the outer while loop if true.
-                  found = found || (typeof result.errorStatus) === 'undefined';
-                  if (!found) {
-                    this.perform(() => {
-                      if (multiMessage) {
-                        process.stdout.write('.');
-                      }
-                    }).pause(checkInterval);
-                  }
-                });
-              }
-              pi++;
-            });
-            wi++;
-          }
-      }
-      })
-    }
-  }).perform(() => {
+    // Not found.
     if (!found) {
-      this.pause(1000).element('css selector', cssSelector, (result) => {
-        if ((typeof result.errorStatus) !== 'undefined') {
-          if (multiMessage) {
-            process.stdout.write(` ✖\n`);
+      this.pause(1).perform(() => {
+        switch (method) {
+          case "A": {
+            Array.from(Array(steps).keys()).forEach(() => {
+              this.element("css selector", cssSelector, stepResult => {
+                found = found || typeof stepResult.errorStatus === "undefined";
+                if (!found) {
+                  this.perform(() => {
+                    if (multiMessage) {
+                      process.stdout.write(".");
+                    }
+                  }).pause(checkInterval);
+                }
+              });
+            }, this);
+            break;
           }
-          if (!multiMessage) {
-            process.stdout.write(` 🔍 Waiting for <${cssSelector}> ✖\n`);
+
+          default: {
+            // Create loop: calls perform 'steps' times.
+            // The while loop ends immediately, that's why I need the second 'pi'
+            // index.
+            // I still have issues when checkInterval < ~500.
+            let whileLoopIndex = 0;
+            let pi = 0;
+
+            while (whileLoopIndex < steps && !found) {
+              // eslint-disable-next-line no-loop-func
+              this.perform(() => {
+                if (pi < steps && !found) {
+                  this.element(
+                    "css selector",
+                    cssSelector,
+                    fallbackStepResult => {
+                      // Break the outer while loop if true.
+                      found =
+                        found ||
+                        typeof fallbackStepResult.errorStatus === "undefined";
+                      if (!found) {
+                        this.perform(() => {
+                          if (multiMessage) {
+                            process.stdout.write(".");
+                          }
+                        }).pause(checkInterval);
+                      }
+                    }
+                  );
+                }
+                pi += 1;
+              });
+              whileLoopIndex += 1;
+            }
           }
         }
       });
     }
+  })
+    .perform(() => {
+      if (!found) {
+        this.pause(1000).element("css selector", cssSelector, result => {
+          if (typeof result.errorStatus !== "undefined") {
+            if (multiMessage) {
+              process.stdout.write(` ✖\n`);
+            }
+            if (!multiMessage) {
+              process.stdout.write(` 🔍 Waiting for <${cssSelector}> ✖\n`);
+            }
+          }
+        });
+      }
 
-    if (found && multiMessage) {
-      process.stdout.write(` ✔\n`);
-    }
+      if (found && multiMessage) {
+        process.stdout.write(` ✔\n`);
+      }
 
-    if (found && !multiMessage) {
-      process.stdout.write(` 🔍 Waiting for <${cssSelector}> ✔\n`);
-    }
-  }).assert.elementPresent(cssSelector, 'Found');
+      if (found && !multiMessage) {
+        process.stdout.write(` 🔍 Waiting for <${cssSelector}> ✔\n`);
+      }
+    })
+    .assert.elementPresent(cssSelector, "Found");
 
   return this;
-}
+};

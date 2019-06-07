@@ -8,11 +8,9 @@
  *   The 'browser' instance.
  */
 exports.command = function smartURL(relativeUri) {
-
   if (this.drupalRelativeURL) {
     this.drupalRelativeURL(relativeUri);
-  }
-  else {
+  } else {
     this.url(this.launchUrl + relativeUri);
   }
   // Nightwatch doesn't like it when no actions are added in a command file.
@@ -20,5 +18,4 @@ exports.command = function smartURL(relativeUri) {
   this.pause(1);
 
   return this;
-
 };

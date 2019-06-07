@@ -11,22 +11,23 @@
  */
 exports.command = function setDateValue(cssSelector, callback) {
   const _self = this;
-  this
-    .execute(function () {
+  this.execute(
+    /* eslint-disable func-names, prefer-rest-params, prefer-arrow-callback */
+    function() {
       try {
         // Chrome throws error on this...
         document.querySelector(arguments[0]).focus(false);
-      }
-      catch (e) {
+      } catch (e) {
         document.querySelector(arguments[0]).focus();
       }
     },
+    /* eslint-enable func-names, prefer-rest-params, prefer-arrow-callback */
     [cssSelector]
-    );
-  if (typeof callback === 'function') {
+  );
+
+  if (typeof callback === "function") {
     callback.call(_self);
   }
 
   return this;
-
 };

@@ -32,16 +32,12 @@
         "platform": "MAC",
         "chromeOptions": {
           "args": [
-            "headless",
-            "disable-gpu",
             "disable-web-security",
             "ignore-certificate-errors"
           ]
         },
         "goog:chromeOptions": {
           "args": [
-            "headless",
-            "disable-gpu",
             "disable-web-security",
             "ignore-certificate-errors"
           ]
@@ -55,16 +51,12 @@
         "platform": "WIN8_1",
         "chromeOptions": {
           "args": [
-            "headless",
-            "disable-gpu",
             "disable-web-security",
             "ignore-certificate-errors"
           ]
         },
         "goog:chromeOptions": {
           "args": [
-            "headless",
-            "disable-gpu",
             "disable-web-security",
             "ignore-certificate-errors"
           ]
@@ -78,16 +70,12 @@
         "platform": "Linux",
         "chromeOptions": {
           "args": [
-            "headless",
-            "disable-gpu",
             "disable-web-security",
             "ignore-certificate-errors"
           ]
         },
         "goog:chromeOptions": {
           "args": [
-            "headless",
-            "disable-gpu",
             "disable-web-security",
             "ignore-certificate-errors"
           ]
@@ -100,7 +88,7 @@
         "browserName": "firefox",
         "platformName": "mac",
         "moz:firefoxOptions": {
-          "args": ["-headless"]
+          "args": []
         }
       }
     },
@@ -110,7 +98,7 @@
         "browserName": "firefox",
         "platformName": "windows",
         "moz:firefoxOptions": {
-          "args": ["-headless"]
+          "args": []
         }
       }
     },
@@ -120,7 +108,7 @@
         "browserName": "firefox",
         "platformName": "linux",
         "moz:firefoxOptions": {
-          "args": ["-headless"]
+          "args": []
         }
       }
     },

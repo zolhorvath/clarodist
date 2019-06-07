@@ -13,9 +13,9 @@
  * @return {object}
  *   The 'browser' instance.
  */
-exports.command = function setSelectValue(cssSelector, value = '', callback) {
+exports.command = function setSelectValue(cssSelector, value = "", callback) {
   const _self = this;
-  const cssSelectorForOption = cssSelector + ' option[value="' + value + '"]';
+  const cssSelectorForOption = `${cssSelector} option[value="${value}"]`;
 
   // Assert that the element is a select.
   this.assert.elementPresent(cssSelector);
@@ -23,26 +23,27 @@ exports.command = function setSelectValue(cssSelector, value = '', callback) {
   this.assert.elementPresent(cssSelectorForOption);
 
   // Safari is a bit confused when trying to assert element type.
-  const weirdBrowsers = ['Safari'];
+  const weirdBrowsers = ["Safari"];
   if (weirdBrowsers.indexOf(this.capabilities.browserName) < 0) {
-    this.expect.element(cssSelector).to.be.a('select');
-    this.expect.element(cssSelectorForOption).to.be.an('option');
+    this.expect.element(cssSelector).to.be.a("select");
+    this.expect.element(cssSelectorForOption).to.be.an("option");
   }
 
   // Set the value and trigger a change event.
-  this
-    .click(cssSelector) // To have focus...
+  this.click(cssSelector) // To have focus...
     .setValue(cssSelector, value) // Set value.
     .execute(
-      function () {
+      /* eslint-disable func-names, prefer-rest-params */
+      function() {
         // Set the value again.
         document.querySelector(arguments[0]).value = arguments[1];
-        document.querySelector(arguments[0]).dispatchEvent(new Event('change'));
+        document.querySelector(arguments[0]).dispatchEvent(new Event("change"));
       },
+      /* eslint-enable func-names, prefer-rest-params */
       [cssSelector, value]
     );
 
-  if (typeof callback === 'function') {
+  if (typeof callback === "function") {
     callback.call(_self);
   }
 

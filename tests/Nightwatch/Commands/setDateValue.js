@@ -13,29 +13,38 @@
  * @return {object}
  *   The 'browser' instance.
  */
-exports.command = function setDateValue(cssSelector, value = '', callback) {
+exports.command = function setDateValue(cssSelector, value = "", callback) {
   const _self = this;
-  const platformName = (_self.capabilities.platformName || _self.capabilities.platform || 'nan').toLowerCase();
-  const browserName = (_self.capabilities.browserName || 'nan').toLowerCase();
+  const platformName = (
+    _self.capabilities.platformName ||
+    _self.capabilities.platform ||
+    "nan"
+  ).toLowerCase();
+  const browserName = (_self.capabilities.browserName || "nan").toLowerCase();
   // Year: dateparts[0], month: dateparts[1], day: dateparts[2];
-  const dateparts = value.split('-');
+  const dateparts = value.split("-");
   const fillPattern = {
-    'chrome::mac': dateparts[0] + this.Keys.TAB + dateparts[1] + dateparts[2],
-    'chrome': dateparts[1] + dateparts[2] + dateparts[0]
+    "chrome::mac": dateparts[0] + this.Keys.TAB + dateparts[1] + dateparts[2],
+    chrome: dateparts[1] + dateparts[2] + dateparts[0]
   };
 
-  this
-    .execute(function () {
-        document.querySelector(arguments[0]).value = arguments[1];
-      },
-      [cssSelector, value]
-    )
-    .setValue(cssSelector, (fillPattern[`${browserName}::${platformName}`] || fillPattern[browserName] || value));
+  this.execute(
+    /* eslint-disable func-names, prefer-rest-params */
+    function() {
+      document.querySelector(arguments[0]).value = arguments[1];
+    },
+    /* eslint-enable func-names, prefer-rest-params */
+    [cssSelector, value]
+  ).setValue(
+    cssSelector,
+    fillPattern[`${browserName}::${platformName}`] ||
+      fillPattern[browserName] ||
+      value
+  );
 
-  if (typeof callback === 'function') {
+  if (typeof callback === "function") {
     callback.call(_self);
   }
 
   return this;
-
 };
