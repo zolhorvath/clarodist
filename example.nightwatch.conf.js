@@ -37,6 +37,9 @@ module.exports = (settings => {
   settings.test_settings.default.selenium_host = ip;
   settings.test_settings.default.launch_url = `http://${ip}/clarodist/zdev/public_html`;
 
+  // Different iOS version.
+  settings.test_settings.iPhone5.desiredCapabilities.platformVersion = "12.2";
+
   // // Ask headless browsers where possible.
   // Object.keys(settings.test_settings).forEach(browserName => {
   //   if (settings.test_settings[browserName].desiredCapabilities) {
