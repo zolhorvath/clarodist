@@ -22,13 +22,17 @@ exports.command = function savefullScreenShot(
   namePrefix = "",
   nameSuffix = "",
   name = "",
-  override = typeof this.globals.fullScreenShotOverride !== "undefined"
-    ? this.globals.fullScreenShotOverride
+  override = typeof this.globals.screenShotOverride !== "undefined"
+    ? this.globals.screenShotOverride
     : true,
-  pieceShots = typeof this.globals.fullScreenShotPieces !== "undefined"
-    ? this.globals.fullScreenShotPieces
+  pieceShots = typeof this.globals.fullScreenShotInPieces !== "undefined"
+    ? this.globals.fullScreenShotInPieces
     : false
 ) {
+  const ie11isweird =
+    typeof this.globals.ie11IsWeird !== "undefined"
+      ? this.globals.ie11IsWeird
+      : false;
   const _self = this;
   const platformName =
     _self.capabilities.platformName || _self.capabilities.platform || "nan";
@@ -75,6 +79,13 @@ exports.command = function savefullScreenShot(
       index += 1;
     }
     fileNameWithPath += `_${index}`;
+  }
+
+  if (ie11isweird) {
+    pieceShots =
+      platformName === "WINDOWS" && browserName === "internet explorer"
+        ? false
+        : pieceShots;
   }
 
   // Common storage.

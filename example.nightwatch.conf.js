@@ -23,13 +23,17 @@ Object.keys(ifaces).forEach(ifname => {
 });
 
 module.exports = (settings => {
-  // Don't override full screen capture files.
+  // Whether existing screen capture files should be overridden or not.
   // If this is not defined or is not false then the generated pngs get
   // overridden on each test run.
-  settings.test_settings.default.globals.fullScreenShotOverride = true;
+  settings.test_settings.default.globals.screenShotOverride = true;
   // Whether produce pieces or not (useful for mobile and some non-headless
   // browsers).
-  settings.test_settings.default.globals.fullScreenShotPieces = true;
+  settings.test_settings.default.globals.fullScreenShotInPieces = true;
+  // If IE11 creates full page screenshots even if fullScreenShotInPieces is set
+  // to true, set this to true, and we will ignore piece generation for
+  // IE11 on Windows.
+  settings.test_settings.default.globals.ie11IsWeird = true;
 
   const customIp = "172.16.0.189";
   const ip = ips[0] || customIp;
@@ -38,7 +42,7 @@ module.exports = (settings => {
   settings.test_settings.default.launch_url = `http://${ip}/clarodist/zdev/public_html`;
 
   // Different iOS version.
-  settings.test_settings.iPhone5.desiredCapabilities.platformVersion = "12.2";
+  settings.test_settings.iPhone5.desiredCapabilities.platformVersion = "12.1";
 
   // // Ask headless browsers where possible.
   // Object.keys(settings.test_settings).forEach(browserName => {

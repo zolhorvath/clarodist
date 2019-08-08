@@ -20,8 +20,8 @@ exports.command = function savefullScreenShot(
   namePrefix = "",
   nameSuffix = "",
   name = "",
-  override = typeof this.globals.fullScreenShotOverride !== "undefined"
-    ? this.globals.fullScreenShotOverride
+  override = typeof this.globals.screenShotOverride !== "undefined"
+    ? this.globals.screenShotOverride
     : true
 ) {
   const _self = this;
