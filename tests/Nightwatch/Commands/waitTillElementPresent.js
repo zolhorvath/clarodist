@@ -37,15 +37,19 @@ exports.command = function waitTillElementPresent(
         switch (method) {
           case "A": {
             Array.from(Array(steps).keys()).forEach(() => {
-              this.element("css selector", cssSelector, stepResult => {
-                found = found || typeof stepResult.errorStatus === "undefined";
-                if (!found) {
-                  this.perform(() => {
-                    if (multiMessage) {
-                      process.stdout.write(".");
-                    }
-                  }).pause(checkInterval);
-                }
+              this.perform(done => {
+                this.element("css selector", cssSelector, stepResult => {
+                  found =
+                    found || typeof stepResult.errorStatus === "undefined";
+                  if (!found) {
+                    this.perform(() => {
+                      if (multiMessage) {
+                        process.stdout.write(".");
+                      }
+                    }).pause(checkInterval);
+                  }
+                });
+                done();
               });
             }, this);
             break;
