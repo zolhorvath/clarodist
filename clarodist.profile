@@ -19,10 +19,6 @@ function clarodist_modules_installed($modules) {
     _clarodist_add_toolbar_visibility();
   }
 
-  if (in_array('lang_hebrew', $modules)) {
-    _clarodist_add_language_switcher();
-  }
-
   if (in_array('styleguide', $modules)) {
     // Set front page to styleguide.
     \Drupal::service('config.factory')->getEditable('system.site')
@@ -98,43 +94,5 @@ function _clarodist_add_toolbar_visibility() {
         $block_config->save();
       }
     }
-  }
-}
-
-/**
- * Helper function for lang_hebrew.
- *
- * Adds language switcher blocks if hebrew language module is installed.
- */
-function _clarodist_add_language_switcher() {
-  $block_ids = ['seven_language_switcher' => 'seven'];
-
-  if (\Drupal::service('theme_handler')->themeExists('claro')) {
-    $block_ids['claro_language_switcher'] = 'claro';
-  }
-
-  // Add the toolbar visibility condition provided by cd_core module.
-  foreach ($block_ids as $block_id => $theme) {
-    if (!empty(Block::load($block_id))) {
-      continue;
-    }
-
-    $block_values = [
-      'langcode' => 'en',
-      'status' => 1,
-      'id' => $block_id,
-      'theme' => $theme,
-      'region' => 'content',
-      'weight' => 10,
-      'plugin' => 'language_block:language_interface',
-      'settings' => [
-        'id' => 'language_block:language_interface',
-        'label' => 'Language switcher',
-        'provider' => 'language',
-        'label_display' => '0',
-      ],
-    ];
-
-    Block::create($block_values)->save();
   }
 }
