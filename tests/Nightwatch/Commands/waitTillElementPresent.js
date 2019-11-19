@@ -15,7 +15,7 @@ exports.command = function waitTillElementPresent(
   cssSelector,
   timeout = 10000
 ) {
-  const checkInterval = 50;
+  const checkInterval = 200;
   timeout = timeout
     ? Math.ceil(timeout / checkInterval) * checkInterval
     : checkInterval * 10;
