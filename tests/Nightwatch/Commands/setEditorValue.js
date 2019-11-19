@@ -15,7 +15,7 @@
  */
 exports.command = function setEditorValue(cssSelector, value = "", callback) {
   const _self = this;
-  const editorFrameSelector = `${cssSelector} ~ div .cke_wysiwyg_frame`;
+  const editorFrameSelector = `${cssSelector} ~ * .cke_wysiwyg_frame`;
   this.assert.elementPresent(cssSelector);
 
   // Safari is a bit confused when trying to assert element type.
